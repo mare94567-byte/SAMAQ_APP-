@@ -1,0 +1,68 @@
+import 'package:flutter/material.dart';
+import 'dart:io';
+
+class PublishWorkScreen extends StatefulWidget {
+  @override
+  _PublishWorkScreenState createState() => _PublishWorkScreenState();
+}
+
+class _PublishWorkScreenState extends State<PublishWorkScreen> {
+  String status = "مستمر";
+  bool isUploading = false;
+  double uploadProgress = 0.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("لوحة تحكم الناشر - SAMAQ")),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  // --- خانات المعلومات ---
+                  TextField(decoration: InputDecoration(labelText: "اسم المانهوا", border: OutlineInputBorder())),
+                  SizedBox(height: 15),
+                  DropdownButtonFormField(
+                    value: status,
+                    items: ["مستمر", "مكتمل", "متوقف"].map((e) => DropdownMenuItem(child: Text(e), value: e)).toList(),
+                    onChanged: (val) => setState(() => status = val.toString()),
+                    decoration: InputDecoration(labelText: "حالة العمل", border: OutlineInputBorder()),
+                  ),
+                  SizedBox(height: 25),
+
+                  // --- زر رفع الفصول (حتى 50 صورة) ---
+                  ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 60), backgroundColor: Colors.blue[900]),
+                    icon: Icon(Icons.collections),
+                    label: Text("اختيار الصور (حد أقصى 50)"),
+                    onPressed: () {
+                      // كود الـ Image Picker سيوضع هنا
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("تم فتح الاستوديو...")));
+                    },
+                  ),
+
+                  if (isUploading) ...[
+                    SizedBox(height: 20),
+                    Text("جاري وضع العلامة المائية والرفع..."),
+                    LinearProgressIndicator(value: uploadProgress),
+                  ],
+                ],
+              ),
+            ),
+          ),
+          
+          // --- قسم الإعلانات (يظهر دائماً في الأسفل) ---
+          Container(
+            width: double.infinity,
+            height: 60,
+            color: Colors.black,
+            child: Center(child: Text("مساحة إعلانية - AdMob", style: TextStyle(color: Colors.grey))),
+          ),
+        ],
+      ),
+    );
+  }
+}
