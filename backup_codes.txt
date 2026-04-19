@@ -66,3 +66,32 @@ class _PublishWorkScreenState extends State<PublishWorkScreen> {
     );
   }
 }
+// --- كود قالب الإعلانات SAMAQ Ads ---
+// هذا الكود يوضع داخل الـ Scaffold في أي صفحة تريدها
+
+Widget samaqAdBanner() {
+  return Container(
+    height: 60, // ارتفاع الإعلان
+    width: double.infinity,
+    decoration: BoxDecoration(
+      color: Colors.black, // خلفية الإعلان
+      border: Border(top: BorderSide(color: Colors.blue, width: 0.5)), // خط جمالي أزرق
+    ),
+    alignment: Alignment.center,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.ads_click, color: Colors.blue, size: 20),
+        SizedBox(width: 10),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("مساحة إعلانية مدعومة", style: TextStyle(color: Colors.white, fontSize: 10)),
+            Text("إعلانات SAMAQ لدعم المترجمين", style: TextStyle(color: Colors.blue, fontSize: 12, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ],
+    ),
+  );
+}
