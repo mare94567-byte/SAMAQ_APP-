@@ -95,3 +95,59 @@ Widget samaqAdBanner() {
     ),
   );
 }
+import 'package:flutter/material.dart';
+
+class MangaReaderScreen extends StatefulWidget {
+  final String title;
+  MangaReaderScreen({required this.title});
+
+  @override
+  _MangaReaderScreenState createState() => _MangaReaderScreenState();
+}
+
+class _MangaReaderScreenState extends State<MangaReaderScreen> {
+  // هنا نضع روابط الصور التجريبية (لاحقاً ستكون صورك المرفوعة)
+  final List<String> pages = [
+    "https://via.placeholder.com/600x900.png?text=SAMAQ+Page+1",
+    "https://via.placeholder.com/600x900.png?text=SAMAQ+Page+2",
+    "https://via.placeholder.com/600x900.png?text=SAMAQ+Page+3",
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black, // أسود حتى تبرز ألوان المانهوا
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.blue[900]?.withOpacity(0.5),
+      ),
+      body: ListView.builder(
+        itemCount: pages.length,
+        itemBuilder: (context, index) {
+          return InteractiveViewer( // يخلي المتابع يقدر يسوي زووم (Zoom) على الصفحة
+            child: Image.network(
+              pages[index],
+              loadingBuilder: (context, child, progress) {
+                if (progress == null) return child;
+                return Center(child: CircularProgressIndicator());
+              },
+            ),
+          );
+        },
+      ),
+      // زر يظهر بالأسفل للإعلانات أو الانتقال للفصل القادم
+      bottomNavigationBar: Container(
+        height: 60,
+        color: Colors.blue[900],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: () {}),
+            Text("الفصل 1", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            IconButton(icon: Icon(Icons.arrow_forward_ios), onPressed: () {}),
+          ],
+        ),
+      ),
+    );
+  }
+}
