@@ -24,3 +24,27 @@ class DownloadsScreen extends StatelessWidget {
     );
   }
 }
+// أضف هذا المتغير داخل الـ State
+int selectedImagesCount = 0;
+
+// استبدل زر الاختيار بهذا الكود المطور
+Column(
+  children: [
+    ElevatedButton.icon(
+      icon: Icon(Icons.photo_library),
+      label: Text("اختيار صور الفصل"),
+      onPressed: () {
+        // محاكاة اختيار الصور
+        setState(() {
+          selectedImagesCount = 50; // افتراضاً اختار الحد الأقصى
+        });
+      },
+    ),
+    if (selectedImagesCount > 0)
+      Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Text("تم اختيار $selectedImagesCount صورة بنجاح", 
+             style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+      ),
+  ],
+)
