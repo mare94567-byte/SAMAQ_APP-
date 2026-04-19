@@ -1,0 +1,21 @@
+name: samaq_app
+description: SAMAQ App for Manga and Manhwa.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  image: ^4.1.3         # لإضافة العلامة المائية SAMAQ
+  image_picker: ^1.0.4  # لرفع الصور من الجهاز
+  shared_preferences: ^2.2.2 # لحفظ الوضع الليلي والتحميلات
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
